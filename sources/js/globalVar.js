@@ -9,9 +9,3 @@ const contractCollectWaste = "0x24E541A5C32830A4E8b89846fd4Bf86E294dd3cb";
 const batchSize = 100;
 const tokensId = [8,9,10,11,12,13,14]
 const maxGas = 200;
-
-
-function setPrivateMain(privateMainAcc){
-    mainSigner = new ethers.Wallet(privateMainAcc, provider);
-    privateMainAddress = mainSigner.getAddress();
-}
