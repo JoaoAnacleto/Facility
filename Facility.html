@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilitys</title>
+    <link rel="stylesheet" type="text/css" href="sources/1.css">
+	
+    <script
+      src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+      type="application/javascript"
+    ></script>
+    <script src="sources/globalVar.js"></script>
+    <script src="sources/tabelas.js"></script>
+    <script src="sources/gasFee.js"></script>
+    <script src="sources/ABIs.js"></script>
+    <script src="sources/ErrorHandling.js"></script>
+    <script src="sources/Dispenser.js"></script>
+    <script src="sources/Balances.js"></script>
+    <script src="sources/sendTokens.js"></script>
+    <script src="sources/completeWastes.js"></script>
+    <script src="sources/RefinoAstro.js"></script>
+    <script src="sources/RefinoWaste.js"></script>
+    <script src="sources/facility.js"></script>
+    <script src="sources/IU_loop.js"></script>
+    <script>
+        function selectFunction(){
+            var seletor = document.getElementById("funcaoSelect");
+            var valorSelecionado = seletor.value;
+            document.getElementById("btn").disabled = true;
+            switch (valorSelecionado) {
+                case "getAllOrders":
+                    getAllOrders(0);
+                    break;
+                case "getAllOrdersR":
+                    getAllOrders(1);
+                    break;
+                case "getAllAstroOrders":
+                    getAllAstroOrders(0);
+                    break;
+                case "getAllAstroOrdersR":
+                    getAllAstroOrders(1);
+                    break;
+                case "claimOrders":
+                    claimOrders();
+                    break;
+                case "claimAstroOrders":
+                    claimAstroOrders();
+                    break;
+                case "CompleteWaste":
+                    CompleteWaste();
+                    break;
+                case "placeWasteOrder":
+                    placeWasteOrder();
+                    break;
+                case "placeProspectingOrders":
+                    placeProspectingOrders();
+                    break;
+                case "getBalancesGas":
+                    getBalanceGas();
+                    break;
+                case "getBalancesWaste":
+                    getBalancesWaste();
+                    break;
+                case "getAllBalances":
+                    getAllBalances();
+                    break;
+                case "sendAll":
+                    sendAll();
+                    break;
+                case "BuildFacility":
+                    BuildFacility();
+                    break;
+                case "placeFacility":
+                    placeFacility();
+                    break;
+                case "speedUpFacilityOrder":
+                    speedUpFacilityOrder();
+                    break;
+                case "claimFacilityOrder":
+                    claimFacilityOrder();
+                    break;
+                default:
+                    break;
+            }
+            document.getElementById("btn").disabled = false;
+        }
+    </script>
+</head>
+<body>
+    <div class="switchAlert">
+        <label style="text-align: center; margin-left: 13px;">Alertas</label><br>
+        <!-- Rounded switch -->
+        <label class="switch">
+            <input type="checkbox" onclick="toggle()">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <h1 class="h1 mb-0" style="margin-top: 50px;">Facilitys</h1>
+    <br><BR>
+    <div>
+        <select class="custom-select" id="funcaoSelect">
+            <option value="" selected disabled>Selecione uma opção</option>
+            <optgroup label="Refino Astro">
+                <option value="getAllAstroOrders">Orders Astro Ativas</option>
+                <option value="getAllAstroOrdersR">Orders Astro Prontas</option>
+                <option value="claimAstroOrders">Claim Astro Orders</option>
+                <option value="placeWasteOrder">Place Astro Orders</option>
+            </optgroup>
+            <optgroup label="Refino Tokens">
+                <option value="getAllOrders">Orders Ativas</option>
+                <option value="getAllOrdersR">Orders Prontas</option>
+                <option value="claimOrders">Claim Orders</option>
+                <option value="placeProspectingOrders">Place Orders</option>
+            </optgroup>
+            <optgroup label="Balances">
+                <option value="getBalancesGas">Balances Gas</option>
+                <option value="getBalancesWaste">Balances Waste</option>
+                <option value="getAllBalances">Balances</option>
+            </optgroup>
+            <optgroup label="Facilitys">
+                <option value="BuildFacility">Build Facility</option>
+                <option value="placeFacility">place Facility</option>
+                <option value="speedUpFacilityOrder">speedUp Facility Order</option>
+                <option value="claimFacilityOrder">claim Facility Order</option>
+            </optgroup>
+            <optgroup label="Outros">
+                <option value="CompleteWaste">Completar Wastes</option>
+                <option value="sendAll">Enviar Tokens</option>
+            </optgroup>
+        </select>
+    </div>
+    <br><br>
+
+    <button id="btn" class="custom-button" onclick="selectFunction()">Executar</button>
+    <br><BR><BR>
+    <div class="card  p-3" style="text-align: center;">
+        <h3>SAFELOW</h3>
+        <br>
+        <div>
+            <div class="h5 text-primary mb-1"><span id="gas"><b>-</b></span></div>
+        </div>
+    </div>
+    <div id="log" style="margin-top: 50px;"></div>
+    <button id="clear" onclick="limparLog()">Limpar</button>
+
+    
+
+</body>
+</html>
