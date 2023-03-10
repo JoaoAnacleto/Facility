@@ -80,7 +80,7 @@
 			</div>
 		</div>
 	</div>
-	<button id="btnExecutar" class="btn btn-secondary" type="button">Executar</button>
+	<button id="btnExecutar" class="btn btn-secondary" type="button" style="display: none;">Executar</button>
 	<div class="container">
 		<div class="row">
 			<div class="col d-flex justify-content-center align-items-center">
@@ -118,10 +118,25 @@
 		const btnExecutar = document.getElementById('btnExecutar');
 		const selectOption = document.getElementById('selectOption');
 
+		selectOption.addEventListener('change', () => {
+			if (selectOption.value !== '') {
+				btnExecutar.style.display = 'block';
+			} else {
+				btnExecutar.style.display = 'none';
+			}
+		});
+
 		btnExecutar.addEventListener('click', () => {
 			const selectedFunction = selectOption.value;
-			console.log(selectedFunction)
-			window[selectedFunction]();
+			if (typeof privateMainAcc === 'undefined' ||
+				typeof privateMainAddress === 'undefined' ||
+				typeof privates === 'undefined') {
+				alert('Informe corretamente as configurações no botão de engrenagem primeiro');
+				return;
+			}
+			if (confirm(`Tem certeza de que deseja executar a função ${selectOption}?`)) {
+				window[selectedFunction]();
+			}
 		});
 	</script>
 </body>

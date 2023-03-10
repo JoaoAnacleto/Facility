@@ -14,7 +14,7 @@ async function log(...args) {
     var text = args.join(" ");
     console.log(text)
     p.textContent = text;
-    logDiv.appendChild(p);
+    //logDiv.appendChild(p);
 }
 async function limparLog() {
     var logDiv = document.getElementById("log");

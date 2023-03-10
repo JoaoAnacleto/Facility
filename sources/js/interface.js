@@ -10,7 +10,7 @@ function updateText() {
   privateMainAcc = config['privateMainAcc']
   privateMainAddress = config['privateMainAddress']
   privates = config['privates']
-  console.log('Configurações salvas com sucesso!');
+  alert('Configurações salvas com sucesso!');
 }
 
 
@@ -38,27 +38,28 @@ function showOptions() {
   let values = [];
   switch (selectedFunction) {
     case "refinoAstro":
-      options = ["Orders Astro Ativas", "Orders Astro Prontas", "Claim Astro Orders", "Place Astro Orders"];
-      values = ["getAllAstroOrders", "getAllAstroOrdersR", "claimAstroOrders", "placeWasteOrder"];
+      options = ["Selecione", "Orders Astro Ativas", "Orders Astro Prontas", "Claim Astro Orders", "Place Astro Orders"];
+      values = ["", "getAllAstroOrders", "getAllAstroOrdersR", "claimAstroOrders", "placeWasteOrder"];
       break;
     case "refinoTokens":
-      options = ["Orders Tokens Ativas", "Orders Tokens Prontas", "Claim Tokens Orders", "Place Tokens Orders"];
-      values = ["getAllOrders", "getAllOrdersR", "claimOrders", "placeProspectingOrders"];
+      options = ["Selecione", "Orders Tokens Ativas", "Orders Tokens Prontas", "Claim Tokens Orders", "Place Tokens Orders"];
+      values = ["", "getAllOrders", "getAllOrdersR", "claimOrders", "placeProspectingOrders"];
       break;
     case "balances":
-      options = ["Balances Gas", "Balances Waste", "Balances Tokens"];
-      values = ["getBalancesGas", "getBalancesWaste", "getAllBalances"];
+      options = ["Selecione", "Balances Gas", "Balances Waste", "Balances Tokens"];
+      values = ["", "getBalanceGas", "getBalancesWaste", "getAllBalances"];
       break;
     case "facilitys":
-      options = ["Build Facility", "Place Facility", "SpeedUp Facility Order", "Claim Facility Order"];
-      values = ["BuildFacility", "placeFacility", "speedUpFacilityOrder", "claimFacilityOrder"];
+      options = ["Selecione", "Build Facility", "Place Facility", "SpeedUp Facility Order", "Claim Facility Order"];
+      values = ["", "BuildFacility", "placeFacility", "speedUpFacilityOrder", "claimFacilityOrder"];
       break;
     case "outros":
-      options = ["Completar Wastes", "Enviar Tokens"];
-      values = ["CompleteWaste", "sendAll"];
+      options = ["Selecione", "Completar Wastes", "Enviar Tokens"];
+      values = ["", "CompleteWaste", "sendAll"];
       break;
     default:
       options = ["Selecione uma função primeiro"];
+      values = [""];
   }
 
   options.forEach((option, index) => {
