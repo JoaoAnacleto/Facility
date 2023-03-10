@@ -38,23 +38,23 @@ function showOptions() {
   let values = [];
   switch (selectedFunction) {
     case "refinoAstro":
-      options = ["Selecione", "Orders Astro Ativas", "Orders Astro Prontas", "Claim Astro Orders", "Place Astro Orders"];
+      options = ["Selecione...", "Orders Astro Ativas", "Orders Astro Prontas", "Claim Astro Orders", "Place Astro Orders"];
       values = ["", "getAllAstroOrders", "getAllAstroOrdersR", "claimAstroOrders", "placeWasteOrder"];
       break;
     case "refinoTokens":
-      options = ["Selecione", "Orders Tokens Ativas", "Orders Tokens Prontas", "Claim Tokens Orders", "Place Tokens Orders"];
+      options = ["Selecione...", "Orders Tokens Ativas", "Orders Tokens Prontas", "Claim Tokens Orders", "Place Tokens Orders"];
       values = ["", "getAllOrders", "getAllOrdersR", "claimOrders", "placeProspectingOrders"];
       break;
     case "balances":
-      options = ["Selecione", "Balances Gas", "Balances Waste", "Balances Tokens"];
+      options = ["Selecione...", "Balances Gas", "Balances Waste", "Balances Tokens"];
       values = ["", "getBalanceGas", "getBalancesWaste", "getAllBalances"];
       break;
     case "facilitys":
-      options = ["Selecione", "Build Facility", "Place Facility", "SpeedUp Facility Order", "Claim Facility Order"];
+      options = ["Selecione...", "Build Facility", "Place Facility", "SpeedUp Facility Order", "Claim Facility Order"];
       values = ["", "BuildFacility", "placeFacility", "speedUpFacilityOrder", "claimFacilityOrder"];
       break;
     case "outros":
-      options = ["Selecione", "Completar Wastes", "Enviar Tokens"];
+      options = ["Selecione...", "Completar Wastes", "Enviar Tokens"];
       values = ["", "CompleteWaste", "sendAll"];
       break;
     default:

@@ -14,55 +14,18 @@
 	<script src="sources/js/gasFee.js"></script>
 	<script src="sources/js/ABIs.js"></script>
 	<script src="sources/js/ErrorHandling.js"></script>
-	<script src="sources/js/Dispenser.js"></script>
-	<script src="sources/js/Balances.js"></script>
-	<script src="sources/js/sendTokens.js"></script>
-	<script src="sources/js/completeWastes.js"></script>
-	<script src="sources/js/RefinoAstro.js"></script>
-	<script src="sources/js/RefinoWaste.js"></script>
-	<script src="sources/js/facility.js"></script>
+	<script src="sources/js/collect.js"></script>
 	<script src="sources/js/utils.js"></script>
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Bot Facilitys</a>
+			<a class="navbar-brand" href="index.html">Bot Facilitys</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Funções
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li>
-								<select class="form-select" id="selectFunction" onchange="showOptions()">
-									<option value="">Selecione...</option>
-									<option value="refinoAstro">Refino Astro</option>
-									<option value="refinoTokens">Refino Tokens</option>
-									<option value="balances">Balances</option>
-									<option value="facilitys">Facilitys</option>
-									<option value="outros">Outros</option>
-								</select>
-							</li>
-							<li class="dropdown-divider"></li>
-							<li id="selectOptionContainer" style="display:none;">
-								<select class="form-select" id="selectOption">
-									<option value="">Selecione uma função primeiro</option>
-								</select>
-							</li>
-						</ul>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="farmpage.html">Farm</a>
-					</li>
-				</ul>
-			</div>
 			<div class="navbar-text d-flex flex-column">
 				<span class="h6">Gas Price:</span>
 				<span class="navbar-text mt-0 mr-3 d-inline-block" id="gas">
@@ -80,12 +43,12 @@
 			</div>
 		</div>
 	</div>
-	<button id="btnExecutar" class="btn btn-secondary" type="button" style="display: none;">Executar</button>
+	<button id="btnExecutar" class="btn btn-secondary" type="button" style="display: block;">Coletar</button>
 	<button id="btnAbrirLog" class="btn btn-secondary" type="button">Abrir Log</button>
 	<div class="container">
 		<div class="row">
 			<div class="col d-flex justify-content-center align-items-center">
-				<img src="sources/imgs/Bot-PhotoRoom.png" class="img-fluid" alt="Bot Facilitys Image">
+				<img src="sources/imgs/Bot-farm.png" class="img-farm" alt="Bot Facilitys Image">
 			</div>
 		</div>
 	</div>
@@ -122,32 +85,22 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 	<script>
 		const btnExecutar = document.getElementById('btnExecutar');
-		const selectOption = document.getElementById('selectOption');
 		const btnAbrirLog = document.getElementById('btnAbrirLog');
 
-		btnAbrirLog.addEventListener('click', () => {
-			logPopup.style.display = 'block';
-		});
-
-		selectOption.addEventListener('change', () => {
-			if (selectOption.value !== '') {
-				btnExecutar.style.display = 'block';
-			} else {
-				btnExecutar.style.display = 'none';
-			}
-		});
-
 		btnExecutar.addEventListener('click', () => {
-			const selectedFunction = selectOption.value;
 			if (typeof privateMainAcc === 'undefined' ||
 				typeof privateMainAddress === 'undefined' ||
 				typeof privates === 'undefined') {
 				alert('Informe corretamente as configurações no botão de engrenagem primeiro');
 				return;
 			}
-			if (confirm(`Tem certeza de que deseja executar a função ${selectedFunction}?`)) {
-				window[selectedFunction]();
+			if (confirm(`Tem certeza de que deseja executar a função collectAll?`)) {
+				collectAll();
 			}
+		});
+
+		btnAbrirLog.addEventListener('click', () => {
+			logPopup.style.display = 'block';
 		});
 
 		btnLimpar.addEventListener('click', () => {

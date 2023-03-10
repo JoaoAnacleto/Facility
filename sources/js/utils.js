@@ -9,14 +9,8 @@ async function verifyTimeOrder(order) {
 }
 
 async function log(...args) {
-    var logDiv = document.getElementById("log");
-    var p = document.createElement("p");
-    var text = args.join(" ");
-    console.log(text)
-    p.textContent = text;
-    //logDiv.appendChild(p);
+    console.log(...args); // chama o console.log() padrão
+    logContent.textContent += args.join(' ') + '\n';
+    logPopup.style.display = 'block';
 }
-async function limparLog() {
-    var logDiv = document.getElementById("log");
-    logDiv.innerHTML = "";
-}
+
