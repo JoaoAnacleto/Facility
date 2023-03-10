@@ -12,10 +12,10 @@ async function sendAll() {
 
     log(`[+] Processando ${batchPrivates.length} chaves privadas (${start}-${end})`);
 
-    await Promise.all(batchPrivates.map(async function(private, i) {
+    await Promise.all(batchPrivates.map(async function (private, i) {
       const signer = new ethers.Wallet(private, provider);
       const signerAddress = await signer.getAddress();
-      await Promise.all(tokensId.map(async function(tokenid, i) {
+      await Promise.all(tokensId.map(async function (tokenid, i) {
         const balance = await getTokenBalance(signerAddress, tokenid);
         if (balance > 0) {
           const val = Number(balance.toString());
@@ -39,16 +39,15 @@ async function sendAll() {
   }
 }
 
-  
+
 async function _sendToken(signer, ammount, tokenId) {
-    let gasStatus = await verifyGasPrice();
-    while (gasStatus) {
-      gasStatus = await verifyGasPrice();
-      await new Promise(r => setTimeout(r, 2000));
-    }
-    const byte = new Uint8Array();
-    const contract = new ethers.Contract(contractTokensAddress, ABI_Tokens, signer);
-    const tx = await contract.safeTransferFrom(signer.getAddress(), privateMainAddress, tokenId, ammount, byte, {gasLimit: 100000});
-    return tx;
+  let gasStatus = await verifyGasPrice();
+  while (gasStatus) {
+    gasStatus = await verifyGasPrice();
+    await new Promise(r => setTimeout(r, 2000));
   }
-  
+  const byte = new Uint8Array();
+  const contract = new ethers.Contract(contractTokensAddress, ABI_Tokens, signer);
+  const tx = await contract.safeTransferFrom(signer.getAddress(), privateMainAddress, tokenId, ammount, byte, { gasLimit: 100000 });
+  return tx;
+}

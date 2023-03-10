@@ -1,28 +1,62 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Bot Facilitys</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Link para o arquivo CSS do Bootstrap com tema dark -->
 	<link rel="stylesheet" href="https://bootswatch.com/5/darkly/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="sources/styles/main.css">
-    <script src="sources/js/interface.js"></script>
-    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-    <script src="sources/js/globalVar.js"></script>
+	<link rel="stylesheet" type="text/css" href="sources/styles/main.css">
+	<script src="sources/js/interface.js"></script>
+	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+	<script src="sources/js/globalVar.js"></script>
 	<script src="sources/js/gasFee.js"></script>
+	<script src="sources/js/ABIs.js"></script>
+	<script src="sources/js/ErrorHandling.js"></script>
+	<script src="sources/js/Dispenser.js"></script>
+	<script src="sources/js/Balances.js"></script>
+	<script src="sources/js/sendTokens.js"></script>
+	<script src="sources/js/completeWastes.js"></script>
+	<script src="sources/js/RefinoAstro.js"></script>
+	<script src="sources/js/RefinoWaste.js"></script>
+	<script src="sources/js/facility.js"></script>
+	<script src="sources/js/utils.js"></script>
 </head>
+
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Bot Facilitys</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="#">Funções</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Funções
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li>
+								<select class="form-select" id="selectFunction" onchange="showOptions()">
+									<option value="">Selecione...</option>
+									<option value="refinoAstro">Refino Astro</option>
+									<option value="refinoTokens">Refino Tokens</option>
+									<option value="balances">Balances</option>
+									<option value="facilitys">Facilitys</option>
+									<option value="outros">Outros</option>
+								</select>
+							</li>
+							<li class="dropdown-divider"></li>
+							<li id="selectOptionContainer" style="display:none;">
+								<select class="form-select" id="selectOption">
+									<option value="">Selecione uma função primeiro</option>
+								</select>
+							</li>
+						</ul>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Farm</a>
@@ -34,17 +68,19 @@
 				<span class="navbar-text mt-0 mr-3 d-inline-block" id="gas">
 					100
 				</span>
-			</div>			
-			
+			</div>
+
 		</div>
 	</nav>
-    <div class="container-fluid">
+	<div class="container-fluid">
 		<div class="row justify-content-end">
 			<div class="col-1 align-self-center">
-				<img src="sources/imgs/settings-icon.png" alt="Configurações" class="settings-icon" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				<img src="sources/imgs/settings-icon.png" alt="Configurações" class="settings-icon"
+					data-bs-toggle="modal" data-bs-target="#exampleModal">
 			</div>
 		</div>
 	</div>
+	<button id="btnExecutar" class="btn btn-secondary" type="button">Executar</button>
 	<div class="container">
 		<div class="row">
 			<div class="col d-flex justify-content-center align-items-center">
@@ -53,30 +89,41 @@
 		</div>
 	</div>
 
-    <!-- Modal para as configurações -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Configurações</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <div class="mb-3">
-                <label for="configJson" class="form-label">Configurações em JSON:</label>
-                <textarea class="form-control" id="configJson" rows="3"></textarea>
-            </div>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-primary" onclick="updateText()">Salvar</button>
-            </div>
-        </div>
-        </div>
-    </div>
-  
+	<!-- Modal para as configurações -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Configurações</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<label for="configJson" class="form-label">Configurações em JSON:</label>
+						<textarea class="form-control" id="configJson" rows="3"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary" onclick="updateText()">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<!-- Link para o arquivo JavaScript do Bootstrap -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+	<script>
+		const btnExecutar = document.getElementById('btnExecutar');
+		const selectOption = document.getElementById('selectOption');
+
+		btnExecutar.addEventListener('click', () => {
+			const selectedFunction = selectOption.value;
+			console.log(selectedFunction)
+			window[selectedFunction]();
+		});
+	</script>
 </body>
+
 </html>
