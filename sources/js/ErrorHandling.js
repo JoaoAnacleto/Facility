@@ -4,10 +4,10 @@ const errorLib = [
 ]
 
 
-async function verifyTx(err) {
+async function verifyTx(err, address) {
     const FullerrorMessage = err.toString();
     const errorMessage = await getMessageError(FullerrorMessage);
-    log(errorMessage);
+    log(`[*] account: ${address} - Error: ${errorMessage}`);
 }
 
 async function getMessageError(errorMessage) {

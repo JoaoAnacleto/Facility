@@ -24,7 +24,7 @@ async function sendAll() {
             //const r_tx = await tx.wait();
             log(`[*] tx para ${signerAddress}: ${tx.hash} (TokenID: ${tokenid}, Valor: ${val})`);
           } catch (err) {
-            await verifyTx(err);
+            await verifyTx(err, signerAddress);
           }
         }
       }));

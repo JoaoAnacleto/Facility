@@ -18,8 +18,12 @@ async function collectAll() {
             if (ammount >= 6) {
                 const [web3Token, authorization] = await login(account);
                 const signature = await getSignature(authorization, web3Token, account)
-                const tx = await collect_trash(account, signature)
-                log(`[*] account: ${account.address} hash: ${tx.hash}`)
+                try {
+                    const tx = await collect_trash(account, signature)
+                    log(`[*] account: ${account.address} hash: ${tx.hash}`)
+                } catch (err) {
+                    await verifyTx(err, account.address);
+                }
             }
         }));
         log(`[-] Concluído o processamento do lote ${batchIndex + 1} de ${numBatches}`);

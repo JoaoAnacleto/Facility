@@ -20,7 +20,7 @@ async function placeWasteOrder() {
           const tx = await _placeAstro(signer, ammount);
           log(`[*] tx: `, tx.hash);
         } catch (err) {
-          await verifyTx(err);
+          await verifyTx(err, signerAddress);
         }
       }
     });
@@ -72,7 +72,7 @@ async function claimAstroOrders() {
               //const r_tx = await tx.wait();
               log(`[*] tx para ${signer.address}: ${tx.hash} (OrdemID: ${order[0]})`);
             } catch (err) {
-              await verifyTx(err);
+              await verifyTx(err, signer.address);
             }
           }
         });

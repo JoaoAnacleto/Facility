@@ -22,7 +22,7 @@ async function placeProspectingOrders() {
           //const r_tx = await tx.wait();
           log(`[*] tx: `, tx.hash);
         } catch (err) {
-          await verifyTx(err);
+          await verifyTx(err, signerAddress);
         }
       }
     });
@@ -80,7 +80,7 @@ async function claimOrders() {
               //const r_tx = await tx.wait();
               log(`[*] tx para ${signer.address}: ${tx.hash} (OrdemID: ${order[0]})`);
             } catch (err) {
-              await verifyTx(err);
+              await verifyTx(err, signer.address);
             }
           }
         });
