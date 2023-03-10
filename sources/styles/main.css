@@ -156,3 +156,12 @@ body {
 #logPopup button:hover {
     background-color: #aaa;
 }
+
+.divtable {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    text-align: center;
+}

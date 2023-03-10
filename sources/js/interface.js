@@ -20,7 +20,6 @@ async function _atualizaGas() {
   divAtualizacao.innerHTML = obj.toFixed(2).toString() + '  Gwei';
 }
 
-
 var intervaloAtualizacao1 = 3000;
 setInterval(_atualizaGas, intervaloAtualizacao1);
 
@@ -29,11 +28,7 @@ function showOptions() {
   const selectedFunction = selectFunction.value;
   const selectOptionContainer = document.getElementById("selectOptionContainer");
   const selectOption = document.getElementById("selectOption");
-
-  // limpa as opções anteriores
   selectOption.innerHTML = "";
-
-  // adiciona as opções relevantes
   let options = [];
   let values = [];
   switch (selectedFunction) {
@@ -65,8 +60,25 @@ function showOptions() {
   options.forEach((option, index) => {
     selectOption.add(new Option(option, values[index]));
   });
-
-  // exibe o container das opções
   selectOptionContainer.style.display = "block";
 }
 
+
+async function UpdateBalancesMainAccount() {
+  const priceMint = [1, 20, 15, 10, 5, 2]
+  const tokensId2 = [9, 10, 11, 12, 13, 14]
+  let minTiros = 0;
+  await Promise.all(
+    tokensId2.map(async function (tokenid, i) {
+      const balance = await getTokenBalance(privateMainAddress, tokenid);
+      const n = Number(balance.toString()) / priceMint[i];
+      if (i == 0) {
+        minTiros = n;
+      } else if (n < minTiros) {
+        minTiros = n;
+      }
+      document.getElementById(tokenid).children[3].textContent = balance.toString();
+    })
+  );
+  document.getElementById('tiros').textContent = minTiros.toFixed(0)
+}

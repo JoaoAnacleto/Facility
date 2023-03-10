@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bot Facilitys</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="https://bootswatch.com/5/darkly/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="sources/styles/main.css">
+    <script src="sources/js/interface.js"></script>
+    <script src="sources/js/globalVar.js"></script>
+    <script src="sources/js/ABIs.js"></script>
+    <script src="sources/js/ErrorHandling.js"></script>
+    <script src="sources/js/Balances.js"></script>
+    <script src="sources/js/gasFee.js"></script>
+    <script src="sources/js/utils.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Bot Facilitys</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-text d-flex flex-column">
+                <span class="h6">Gas Price:</span>
+                <span class="navbar-text mt-0 mr-3 d-inline-block" id="gas">
+                    100
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-1 align-self-center">
+                <img src="sources/imgs/settings-icon.png" alt="Configurações" class="settings-icon"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+            </div>
+        </div>
+    </div>
+    <button id="btnExecutar" class="btn btn-secondary" type="button" style="display: block;">Atualizar</button>
+    <div class="divtable">
+        <h3 style="text-align: center;">Saldo na conta principal</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Token</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quant.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="9">
+                    <th scope="row">9</th>
+                    <td>Blueprint</td>
+                    <td>8.2</td>
+                    <td>1</td>
+                </tr>
+                <tr id="10">
+                    <th scope="row">10</th>
+                    <td>Outlaier</td>
+                    <td>0.032</td>
+                    <td>1</td>
+                </tr>
+                <tr id="11">
+                    <th scope="row">11</th>
+                    <td>Commum</td>
+                    <td>0.041</td>
+                    <td>1</td>
+                </tr>
+                <tr id="12">
+                    <th scope="row">12</th>
+                    <td>Uncommmun</td>
+                    <td>0.06</td>
+                    <td>1</td>
+                </tr>
+                <tr id="13">
+                    <th scope="row">13</th>
+                    <td>Rare</td>
+                    <td>0.5</td>
+                    <td>1</td>
+                </tr>
+                <tr id="14">
+                    <th scope="row">14</th>
+                    <td>Lendary</td>
+                    <td>2.2</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align: center; padding: 400px;">
+        <h4 style="padding: 10px;">Tiros disponiveis:</h4>
+        <span id="tiros">0</span>
+    </div>
+
+    <!-- Modal para as configurações -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Configurações</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="configJson" class="form-label">Configurações em JSON:</label>
+                        <textarea class="form-control" id="configJson" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="updateText()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script>
+        btnExecutar.addEventListener('click', () => {
+            if (typeof privateMainAcc === 'undefined' ||
+                typeof privateMainAddress === 'undefined' ||
+                typeof privates === 'undefined') {
+                alert('Informe corretamente as configurações no botão de engrenagem primeiro');
+                return;
+            }
+            UpdateBalancesMainAccount();
+        });
+
+    </script>
+</body>
+
+</html>
