@@ -168,7 +168,7 @@ async function collect_trash(account, signature) {
         signature.v,
         signature.r,
         signature.s,
-        { gasLimit: 500000 }
+        { gasLimit: 450000 }
     );
     return tx;
 }
