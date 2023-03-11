@@ -8,4 +8,4 @@ const contractFacilitysAddress = "0x9C31aDa541dfa3E867460Be0572C1a57311Df6FF";
 const contractCollectWaste = "0x24E541A5C32830A4E8b89846fd4Bf86E294dd3cb";
 const batchSize = 100;
 const tokensId = [8,9,10,11,12,13,14]
-const maxGas = 200;
+const maxGas = 100;
