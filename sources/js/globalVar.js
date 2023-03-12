@@ -7,5 +7,5 @@ const contractDispenserTokensAddress = "0x219E5cE7B2667a2Bd07C583DEAF5731e64b02c
 const contractFacilitysAddress = "0x9C31aDa541dfa3E867460Be0572C1a57311Df6FF";
 const contractCollectWaste = "0x24E541A5C32830A4E8b89846fd4Bf86E294dd3cb";
 const batchSize = 100;
-const tokensId = [8,9,10,11,12,13,14]
-const maxGas = 200;
+const tokensId = [8, 9, 10, 11, 12, 13, 14]
+const maxGas = 150;
